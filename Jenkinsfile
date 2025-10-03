@@ -134,6 +134,8 @@ pipeline {
                                 break
                             elif [ $i -eq 30 ]; then
                                 echo "❌ API failed to become healthy after 300 seconds"
+                                echo "📋 Container logs:"
+                                docker logs family-tree-api-quarkus --tail 100
                                 exit 1
                             else
                                 echo "⏳ Attempt $i/30: API not ready, waiting 10s..."
