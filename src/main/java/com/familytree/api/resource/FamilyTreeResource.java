@@ -59,6 +59,18 @@ public class FamilyTreeResource {
         return Response.ok(tree).build();
     }
 
+    @GET
+    @Path("/{treeId}/full")
+    public Response getTreeWithMembers(@PathParam("treeId") Long treeId) {
+        FamilyTree tree = FamilyTree.findById(treeId);
+        if (tree == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        // Force initialization of members collection
+        tree.members.size();
+        return Response.ok(tree).build();
+    }
+
     @DELETE
     @Path("/{treeId}")
     @Transactional
