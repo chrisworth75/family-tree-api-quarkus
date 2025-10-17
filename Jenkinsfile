@@ -62,6 +62,12 @@ pipeline {
             }
         }
 
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'build/api-collection.json', fingerprint: true, allowEmptyArchive: true
+            }
+        }
+
         stage('Deploy') {
             when {
                 branch 'main'

@@ -109,6 +109,28 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+
+            <!-- Exec Maven Plugin for generating Postman collection -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-postman-collection</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>node</executable>
+                            <arguments>
+                                <argument>${project.basedir}/generate-collection.js</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
