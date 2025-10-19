@@ -77,7 +77,7 @@ pipeline {
                     // Kill any process using port 3300
                     sh """
                         echo "Killing any process using port 3300..."
-                        lsof -ti:3300 | xargs kill -9 || true
+                        /usr/sbin/lsof -ti:3300 | xargs kill -9 || true
                     """
 
                     // Create network for container communication
