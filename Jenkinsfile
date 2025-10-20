@@ -44,7 +44,7 @@ pipeline {
                 script {
                     sh '''
                         echo "Building with Maven in Docker..."
-                        docker run --rm --platform linux/arm64 -v "$(pwd)":/app -w /app maven:3.9-eclipse-temurin-17-alpine mvn clean package -DskipTests
+                        docker run --rm -v "$(pwd)":/app -w /app maven:3.9-eclipse-temurin-17 mvn clean package -DskipTests
                     '''
                 }
             }
