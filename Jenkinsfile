@@ -44,7 +44,7 @@ pipeline {
                 script {
                     sh '''
                         echo "Building with Maven in Docker..."
-                        docker run --rm --platform linux/amd64 -v "$(pwd)":/app -w /app maven:3.9-eclipse-temurin-17-alpine mvn clean package -DskipTests
+                        docker run --rm --platform linux/arm64 -v "$(pwd)":/app -w /app maven:3.9-eclipse-temurin-17-alpine mvn clean package -DskipTests
                     '''
                 }
             }
@@ -140,7 +140,7 @@ pipeline {
                     // Wait for API to be healthy with retries
                     sh '''
                         echo "⏳ Waiting for API to be healthy..."
-                        for i in {1..30}; do
+                        for i in $(seq 1 30); do
                             if curl -f -s http://localhost:3300/health > /dev/null 2>&1; then
                                 echo "✅ API is healthy after $((i * 10)) seconds"
                                 break
