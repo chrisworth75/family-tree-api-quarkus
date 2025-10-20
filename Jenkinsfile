@@ -44,7 +44,10 @@ pipeline {
                 script {
                     sh '''
                         echo "Building with Maven in Docker..."
-                        docker run --rm -v "$(pwd)":/app -w /app maven:3.9-eclipse-temurin-17 mvn clean package -DskipTests
+                        docker run --rm -v "$(pwd)":/app -w /app maven:3.9-eclipse-temurin-17 sh -c "
+                            apt-get update && apt-get install -y nodejs npm &&
+                            mvn clean package -DskipTests
+                        "
                     '''
                 }
             }
