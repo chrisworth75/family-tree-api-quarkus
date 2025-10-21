@@ -77,12 +77,6 @@ pipeline {
             }
             steps {
                 script {
-                    // Kill any process using port 3300
-                    sh """
-                        echo "Killing any process using port 3300..."
-                        /usr/sbin/lsof -ti:3300 | xargs kill -9 || true
-                    """
-
                     // Create network for container communication
                     sh """
                         docker network create family-tree-quarkus-network || echo "Network already exists"
