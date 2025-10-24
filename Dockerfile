@@ -2,6 +2,9 @@ FROM maven:3.9-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
+# Install Node.js for Postman collection generation
+RUN apt-get update && apt-get install -y nodejs npm && rm -rf /var/lib/apt/lists/*
+
 COPY pom.xml .
 RUN mvn dependency:go-offline
 
